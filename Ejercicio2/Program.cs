@@ -23,15 +23,16 @@ namespace Ejercicio2
 
         public Persona()
         {
-            sexo = Sexo_Default;
             DNIgenerado = GenerarDNI();
+            sexo = Sexo_Default;
         }
 
         public Persona(string nombre,int edad,char sexo)
         {
             this.nombre = nombre;
             this.edad = edad;
-            ComprobarSexo(sexo);
+            this.sexo = sexo;
+            ComprobarSexo();
             DNIgenerado = GenerarDNI();
         }
 
@@ -40,9 +41,10 @@ namespace Ejercicio2
             this.nombre = nombre;
             this.edad = edad;
             DNIgenerado = GenerarDNI();
-            ComprobarSexo(sexo);
             this.peso = peso;
             this.altura = altura;
+            this.sexo = sexo;
+            ComprobarSexo();
         }
 
         public double calcularIMC(double peso, double altura)
@@ -71,23 +73,21 @@ namespace Ejercicio2
             if(edad >= 18)
             {
                 esMayor = true;
-                return esMayor;
             }
             else
             {
                 esMayor = false;
-                return esMayor;
             }
+
+            return esMayor;
         }
 
-        private void ComprobarSexo(char sexo)
+        private void ComprobarSexo()
         {
-            if(sexo != 'H' || sexo != 'F')
+            if(sexo != 'H' && sexo != 'M')
             {
-                sexo = Sexo_Default;
+                this.sexo = Sexo_Default;
             }
-
-            this.sexo = sexo;
         }
 
         private int GenerarDNI()
@@ -190,11 +190,31 @@ namespace Ejercicio2
         }
         static void Main(string[] args)
         {
+            Persona per3 = new Persona();
+
+            per3.SetNombre("Martin");
+            per3.SetEdad(34);
+            per3.SetPeso(78);
+            per3.SetAltura(1.86);
+
+            Console.WriteLine("Ingrese el nombre de la otra persona");
+            string f = Console.ReadLine();
+            Console.WriteLine("Ingrese la edad de la otra persona");
+            string g = Console.ReadLine();
+            Console.WriteLine("Ingrese el genero de la otra persona (H = hombre, M = mujer)");
+            char h = Console.ReadKey().KeyChar;
+            Console.WriteLine("\n");
+
+            Persona per2 = new Persona(f, int.Parse(g), h);
+
+            per2.SetPeso(68);
+            per2.SetAltura(1.75);
+
             Console.WriteLine("Ingrese su nombre");
             string a = Console.ReadLine();
             Console.WriteLine("Ingrese su edad");
             string b = Console.ReadLine();
-            Console.WriteLine("Ingrese su genero (H = hombre, F = mujer)");
+            Console.WriteLine("Ingrese su genero (H = hombre, M = mujer)");
             char c = Console.ReadKey().KeyChar;
             Console.WriteLine("\n");
             Console.WriteLine("Ingrese su peso (En kilos)");
@@ -203,24 +223,6 @@ namespace Ejercicio2
             string e = Console.ReadLine();
 
             Persona per1 = new Persona(a, int.Parse(b), c, float.Parse(d), float.Parse(e));
-
-            Console.WriteLine("Ingrese el nombre de la otra persona");
-            string f = Console.ReadLine();
-            Console.WriteLine("Ingrese la edad de la otra persona");
-            string g = Console.ReadLine();
-            Console.WriteLine("Ingrese el genero de la otra persona (H = hombre, F = mujer)");
-            char h = Console.ReadKey().KeyChar;
-            Console.WriteLine("\n");
-
-            Persona per2 = new Persona(f, int.Parse(g), h);
-
-            Persona per3 = new Persona();
-
-            per3.SetNombre("Martin");
-            per3.SetEdad(34);
-            per3.SetSexo('H');
-            per3.SetPeso(78);
-            per3.SetAltura(1.86);
 
             Console.WriteLine("\n\nPeso de la persona 1\n");
 
