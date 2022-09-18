@@ -11,8 +11,8 @@ namespace Ejercicio2
 
         private static char Sexo_Default = 'H';
         public static int Peso_Ideal = 0;
-        public static int Gordo = 1;
-        public static int Flaco = -1;
+        public static int Sobrepeso = 1;
+        public static int Infrapeso = -1;
 
         private string nombre = "";
         private int edad = 0;
@@ -54,7 +54,7 @@ namespace Ejercicio2
             relacPesoAltura = peso / Math.Pow(altura,2);
             if(relacPesoAltura < 20)
             {
-                return Flaco;
+                return Infrapeso;
             }
             else if(relacPesoAltura >=20 && relacPesoAltura <=25)
             {
@@ -62,7 +62,7 @@ namespace Ejercicio2
             }
             else
             {
-                return Gordo;
+                return Sobrepeso;
             }
         }
 
@@ -153,11 +153,11 @@ namespace Ejercicio2
         {
             double PesoPer = p.calcularIMC(p.GetPeso(), p.GetAltura());
 
-            if (PesoPer == Persona.Flaco)
+            if (PesoPer == Persona.Sobrepeso)
             {
                 Console.WriteLine("Esta persona tiene infrapeso");
             }
-            else if (PesoPer == Persona.Gordo)
+            else if (PesoPer == Persona.Infrapeso)
             {
                 Console.WriteLine("Esta persona tiene sobrepeso");
             }
