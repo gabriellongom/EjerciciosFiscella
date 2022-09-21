@@ -30,7 +30,6 @@ namespace Ejercicio3
 
             for (int z = 0; z < contraseña.Length; z++)
             {
-                //contraseña.GetEnumerator();
                 char caracter = contraseña[z];
 
                 if (char.IsDigit(caracter))
