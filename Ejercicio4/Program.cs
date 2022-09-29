@@ -70,9 +70,13 @@ namespace Ejercicio4
         
         private void comprobarConsumoEnergetico(char letra)
         {
-            if((int)letra > 64 && (int)letra < 70 && (int)letra > 96 && (int)letra < 103)
+            if((int)letra < 65 && (int)letra > 70 && (int)letra < 97  && (int)letra > 102)
             {
                 consumo_energetico = C_E_Default;
+            }
+            else if ((int)letra > 96 && (int)letra < 103)
+            {
+                consumo_energetico = char.ToUpper(letra);
             }
             else
             {
@@ -93,17 +97,57 @@ namespace Ejercicio4
         }
         public int precioFinal()
         {
-            int precioCategoria;
-            int precioTamaño;
+            int precioCategoria = 0;
+            int precioPeso = 0;
 
-            int precio_final = 1;
+            precioCategoria = ((int)consumo_energetico - 64) * 20;
+
+            if (peso >= 0 && peso < 20)
+            {
+                precioPeso = 10;
+            }
+            else if (peso >= 20 && peso < 50)
+            {
+                precioPeso = 50;
+            }
+            else if (peso >= 50 && peso < 80)
+            {
+                precioPeso = 80;
+            }
+            else if (peso >= 80)
+            {
+                precioPeso = 100;
+            }
+
+            int precio_final = precio_base + precioCategoria + precioPeso;
             return precio_final;
+        }
+    }
+
+    class Lavadora : Electrodomestico
+    {
+        public static int carga_def = 5;
+
+        private int carga = carga_def;
+
+        public Lavadora()
+        {
+
+        }
+        public Lavadora(int precio, double peso)
+        {
+
+        }
+        public Lavadora(int peso)
+        {
+
         }
     }
     class Program
     {
         static void Main(string[] args)
         {
+ 
         }
     }
 }
