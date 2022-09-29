@@ -13,6 +13,12 @@ namespace Ejercicio4
         public static string color_default = "blanco";
         public static char C_E_Default = 'F';
         public static double peso_default = 5;
+        private static int precio_a = 100;
+        private static int precio_b = 80;
+        private static int precio_c = 60;
+        private static int precio_d = 50;
+        private static int precio_e = 30;
+        private static int precio_f = 10;
 
         private int precio_base = precio_base_default;
         private string color = color_default;
@@ -100,7 +106,27 @@ namespace Ejercicio4
             int precioCategoria = 0;
             int precioPeso = 0;
 
-            precioCategoria = ((int)consumo_energetico - 64) * 20;
+            switch (ConsumoEnergetico)
+            {
+                case 'A':
+                    precioCategoria = precio_a;
+                    break;
+                case 'B':
+                    precioCategoria = precio_b;
+                    break;
+                case 'C':
+                    precioCategoria = precio_c;
+                    break;
+                case 'D':
+                    precioCategoria = precio_d;
+                    break;
+                case 'E':
+                    precioCategoria = precio_e;
+                    break;
+                case 'F':
+                    precioCategoria = precio_f;
+                    break;
+            }
 
             if (peso >= 0 && peso < 20)
             {
@@ -138,9 +164,65 @@ namespace Ejercicio4
         {
 
         }
-        public Lavadora(int peso)
+        public Lavadora(int carga, int precio_base, string color, char consumo, double peso) : base(precio_base,color,consumo,peso)
         {
+            this.carga = carga;
+        }
 
+        public int Carga
+        {
+            get
+            {
+                return carga;
+            }
+        }
+
+        public override int PrecioFinal()
+        {
+            int precioCategoria = 0;
+            int precioPeso = 0;
+
+            switch (ConsumoEnergetico)
+            {
+                case 'A':
+                    precioCategoria = precio_a;
+                    break;
+                case 'B':
+                    precioCategoria = precio_b;
+                    break;
+                case 'C':
+                    precioCategoria = precio_c;
+                    break;
+                case 'D':
+                    precioCategoria = precio_d;
+                    break;
+                case 'E':
+                    precioCategoria = precio_e;
+                    break;
+                case 'F':
+                    precioCategoria = precio_f;
+                    break;
+            }
+
+            if (peso >= 0 && peso < 20)
+            {
+                precioPeso = 10;
+            }
+            else if (peso >= 20 && peso < 50)
+            {
+                precioPeso = 50;
+            }
+            else if (peso >= 50 && peso < 80)
+            {
+                precioPeso = 80;
+            }
+            else if (peso >= 80)
+            {
+                precioPeso = 100;
+            }
+
+            int precio_final = precio_base + precioCategoria + precioPeso;
+            return precio_final;
         }
     }
     class Program
