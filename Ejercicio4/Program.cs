@@ -24,7 +24,8 @@ namespace Ejercicio4
         private string color = color_default;
         private char consumo_energetico = C_E_Default;
         private double peso = peso_default;
-
+        public int precioCategoria = 0;
+        public int precioPeso = 0;
 
         public Electrodomestico()
         {
@@ -104,8 +105,7 @@ namespace Ejercicio4
         }
         public virtual int PrecioFinal()
         {
-            int precioCategoria = 0;
-            int precioPeso = 0;
+            
 
             switch (ConsumoEnergetico)
             {
@@ -227,11 +227,24 @@ namespace Ejercicio4
 
         public override int PrecioFinal()
         {
-            int precioRes = 0;
+            double precioRes = 0;
             int precioSint = 0;
 
+            if (sintonizador == true)
+            {
+                precioSint = 50;
+            }
 
-            int precio_final = PrecioBase + precioCategoria + precioPeso + precioRes + precioSint;
+            double precio_final = PrecioBase + precioCategoria + precioPeso + precioSint;
+
+            if (resolucion > 40)
+            {
+                precioRes = precio_final * 0.3;
+                Math.Floor(precioRes);
+            }
+
+            precio_final = precio_final + precioRes;
+
             return precio_final;
         }
     }
