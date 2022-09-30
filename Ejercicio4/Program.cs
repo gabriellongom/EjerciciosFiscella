@@ -25,6 +25,7 @@ namespace Ejercicio4
         private char consumo_energetico = C_E_Default;
         private double peso = peso_default;
 
+
         public Electrodomestico()
         {
 
@@ -74,7 +75,7 @@ namespace Ejercicio4
             }
         }
         
-        private void comprobarConsumoEnergetico(char letra)
+        private void ComprobarConsumoEnergetico(char letra)
         {
             if((int)letra < 65 && (int)letra > 70 && (int)letra < 97  && (int)letra > 102)
             {
@@ -89,9 +90,9 @@ namespace Ejercicio4
                 consumo_energetico = letra;
             }
         }
-        private void comprobarColor(string color)
+        private void ComprobarColor(string color)
         {
-            Regex rx = new Regex(@"^[blanco]$+@""^[negro]$+@""^[rojo]$+@""^[azul]$+@""^[gris]$", RegexOptions.IgnoreCase);
+            Regex rx = new Regex(@"^[blanco]$|^[negro]$|^[rojo]$|^[azul]$|^[gris]$", RegexOptions.IgnoreCase);
             bool match = rx.IsMatch(color);
             if (match == true){
                 this.color = color;
@@ -101,7 +102,7 @@ namespace Ejercicio4
                 this.color = color_default;
             }
         }
-        public int precioFinal()
+        public virtual int PrecioFinal()
         {
             int precioCategoria = 0;
             int precioPeso = 0;
@@ -150,7 +151,7 @@ namespace Ejercicio4
         }
     }
 
-    class Lavadora : Electrodomestico
+    public class Lavadora : Electrodomestico
     {
         public static int carga_def = 5;
 
@@ -160,9 +161,9 @@ namespace Ejercicio4
         {
 
         }
-        public Lavadora(int precio, double peso)
+        public Lavadora(int precio_base, double peso)
         {
-
+            
         }
         public Lavadora(int carga, int precio_base, string color, char consumo, double peso) : base(precio_base,color,consumo,peso)
         {
@@ -179,49 +180,58 @@ namespace Ejercicio4
 
         public override int PrecioFinal()
         {
-            int precioCategoria = 0;
-            int precioPeso = 0;
+            int precioCarga = 0;
 
-            switch (ConsumoEnergetico)
-            {
-                case 'A':
-                    precioCategoria = precio_a;
-                    break;
-                case 'B':
-                    precioCategoria = precio_b;
-                    break;
-                case 'C':
-                    precioCategoria = precio_c;
-                    break;
-                case 'D':
-                    precioCategoria = precio_d;
-                    break;
-                case 'E':
-                    precioCategoria = precio_e;
-                    break;
-                case 'F':
-                    precioCategoria = precio_f;
-                    break;
-            }
 
-            if (peso >= 0 && peso < 20)
-            {
-                precioPeso = 10;
-            }
-            else if (peso >= 20 && peso < 50)
-            {
-                precioPeso = 50;
-            }
-            else if (peso >= 50 && peso < 80)
-            {
-                precioPeso = 80;
-            }
-            else if (peso >= 80)
-            {
-                precioPeso = 100;
-            }
+            int precio_final = PrecioBase + precioCategoria + precioPeso + precioCarga;
+            return precio_final;
+        }
+    }
 
-            int precio_final = precio_base + precioCategoria + precioPeso;
+    public class Television : Electrodomestico
+    {
+        public static int res_def = 20;
+        public static bool sint_def = false;
+
+        private int resolucion = res_def;
+        private bool sintonizador = sint_def;
+
+        public Television()
+        {
+
+        }
+        public Television(int precio_base, double peso)
+        {
+
+        }
+        public Television(int resolucion, bool sintonizador, int precio_base, string color, char consumo, double peso) : base(precio_base, color, consumo, peso)
+        {
+            this.resolucion = resolucion;
+            this.sintonizador = sintonizador;
+        }
+
+        public int Resolucion
+        {
+            get
+            {
+                return resolucion;
+            }
+        }
+        public bool Sintonizador
+        {
+            get
+            {
+                return sintonizador;
+            }
+        }
+
+        public override int PrecioFinal()
+        {
+            int precioRes = 0;
+            int precioSint = 0;
+
+
+            int precio_final = PrecioBase + precioCategoria + precioPeso + precioRes + precioSint;
             return precio_final;
         }
     }
@@ -229,7 +239,8 @@ namespace Ejercicio4
     {
         static void Main(string[] args)
         {
- 
+            Electrodomestico electrodomestico = new Electrodomestico(250, "azul", 'B', 40);
+            Lavadora lavadora = new Lavadora(20, 250, "azul", 'B', 40);
         }
     }
 }
