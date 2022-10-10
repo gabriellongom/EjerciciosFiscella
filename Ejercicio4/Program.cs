@@ -9,18 +9,18 @@ namespace Ejercicio4
 {
     public class Electrodomestico
     {
-        public static int precio_base_default = 100;
+        public static double precio_base_default = 100;
         public static string color_default = "blanco";
         public static char C_E_Default = 'F';
         public static double peso_default = 5;
-        private static int precio_a = 100;
-        private static int precio_b = 80;
-        private static int precio_c = 60;
-        private static int precio_d = 50;
-        private static int precio_e = 30;
-        private static int precio_f = 10;
+        public static int precio_a = 100;
+        public static int precio_b = 80;
+        public static int precio_c = 60;
+        public static int precio_d = 50;
+        public static int precio_e = 30;
+        public static int precio_f = 10;
 
-        private int precio_base = precio_base_default;
+        private double precio_base = precio_base_default;
         private string color = color_default;
         private char consumo_energetico = C_E_Default;
         private double peso = peso_default;
@@ -31,20 +31,22 @@ namespace Ejercicio4
         {
 
         }
-        public Electrodomestico(int precio_base, double peso)
+        public Electrodomestico(double precio_base, double peso)
         {
             this.precio_base = precio_base;
             this.peso = peso;
         }
-        public Electrodomestico(int precio_base, string color, char consumo, double peso)
+        public Electrodomestico(double precio_base, string color, char consumo, double peso)
         {
             this.precio_base = precio_base;
             this.color = color;
             consumo_energetico = consumo;
             this.peso = peso;
+            ComprobarColor(color);
+            ComprobarConsumoEnergetico(consumo);
         }
 
-        public int PrecioBase
+        public double PrecioBase
         {
             get
             {
@@ -72,23 +74,23 @@ namespace Ejercicio4
         {
             get
             {
-                return Peso;
+                return peso;
             }
         }
         
         private void ComprobarConsumoEnergetico(char letra)
         {
-            if((int)letra < 65 && (int)letra > 70 && (int)letra < 97  && (int)letra > 102)
+            if((int)letra >= 65 && (int)letra <= 70)
             {
-                consumo_energetico = C_E_Default;
+                consumo_energetico = letra;
             }
-            else if ((int)letra > 96 && (int)letra < 103)
+            else if ((int)letra >= 97 && (int)letra <= 102)
             {
                 consumo_energetico = char.ToUpper(letra);
             }
             else
             {
-                consumo_energetico = letra;
+                consumo_energetico = C_E_Default;
             }
         }
         private void ComprobarColor(string color)
@@ -103,9 +105,10 @@ namespace Ejercicio4
                 this.color = color_default;
             }
         }
-        public virtual int PrecioFinal()
+        public virtual double PrecioFinal()
         {
-            
+
+            double precio_final;
 
             switch (ConsumoEnergetico)
             {
@@ -129,24 +132,24 @@ namespace Ejercicio4
                     break;
             }
 
-            if (peso >= 0 && peso < 20)
+            if (Peso >= 0 && Peso < 20)
             {
                 precioPeso = 10;
             }
-            else if (peso >= 20 && peso < 50)
+            else if (Peso >= 20 && Peso < 50)
             {
                 precioPeso = 50;
             }
-            else if (peso >= 50 && peso < 80)
+            else if (Peso >= 50 && Peso < 80)
             {
                 precioPeso = 80;
             }
-            else if (peso >= 80)
+            else if (Peso >= 80)
             {
                 precioPeso = 100;
             }
 
-            int precio_final = precio_base + precioCategoria + precioPeso;
+            precio_final = precio_base + precioCategoria + precioPeso;
             return precio_final;
         }
     }
@@ -165,7 +168,7 @@ namespace Ejercicio4
         {
             
         }
-        public Lavadora(int carga, int precio_base, string color, char consumo, double peso) : base(precio_base,color,consumo,peso)
+        public Lavadora(int carga, double precio_base, string color, char consumo, double peso) : base(precio_base,color,consumo,peso)
         {
             this.carga = carga;
         }
@@ -178,12 +181,55 @@ namespace Ejercicio4
             }
         }
 
-        public override int PrecioFinal()
+        public override double PrecioFinal()
         {
             int precioCarga = 0;
 
+            switch (ConsumoEnergetico)
+            {
+                case 'A':
+                    precioCategoria = precio_a;
+                    break;
+                case 'B':
+                    precioCategoria = precio_b;
+                    break;
+                case 'C':
+                    precioCategoria = precio_c;
+                    break;
+                case 'D':
+                    precioCategoria = precio_d;
+                    break;
+                case 'E':
+                    precioCategoria = precio_e;
+                    break;
+                case 'F':
+                    precioCategoria = precio_f;
+                    break;
+            }
 
-            int precio_final = PrecioBase + precioCategoria + precioPeso + precioCarga;
+            if (Peso >= 0 && Peso < 20)
+            {
+                precioPeso = 10;
+            }
+            else if (Peso >= 20 && Peso < 50)
+            {
+                precioPeso = 50;
+            }
+            else if (Peso >= 50 && Peso < 80)
+            {
+                precioPeso = 80;
+            }
+            else if (Peso >= 80)
+            {
+                precioPeso = 100;
+            }
+
+            if (Carga > 30)
+            {
+                precioCarga = 50;
+            }
+
+            double precio_final = PrecioBase + precioCategoria + precioPeso + precioCarga;
             return precio_final;
         }
     }
@@ -204,7 +250,7 @@ namespace Ejercicio4
         {
 
         }
-        public Television(int resolucion, bool sintonizador, int precio_base, string color, char consumo, double peso) : base(precio_base, color, consumo, peso)
+        public Television(int resolucion, bool sintonizador, double precio_base, string color, char consumo, double peso) : base(precio_base, color, consumo, peso)
         {
             this.resolucion = resolucion;
             this.sintonizador = sintonizador;
@@ -225,7 +271,7 @@ namespace Ejercicio4
             }
         }
 
-        public override int PrecioFinal()
+        public override double PrecioFinal()
         {
             double precioRes = 0;
             int precioSint = 0;
@@ -235,12 +281,50 @@ namespace Ejercicio4
                 precioSint = 50;
             }
 
+            switch (ConsumoEnergetico)
+            {
+                case 'A':
+                    precioCategoria = precio_a;
+                    break;
+                case 'B':
+                    precioCategoria = precio_b;
+                    break;
+                case 'C':
+                    precioCategoria = precio_c;
+                    break;
+                case 'D':
+                    precioCategoria = precio_d;
+                    break;
+                case 'E':
+                    precioCategoria = precio_e;
+                    break;
+                case 'F':
+                    precioCategoria = precio_f;
+                    break;
+            }
+
+            if (Peso >= 0 && Peso < 20)
+            {
+                precioPeso = 10;
+            }
+            else if (Peso >= 20 && Peso < 50)
+            {
+                precioPeso = 50;
+            }
+            else if (Peso >= 50 && Peso < 80)
+            {
+                precioPeso = 80;
+            }
+            else if (Peso >= 80)
+            {
+                precioPeso = 100;
+            }
+
             double precio_final = PrecioBase + precioCategoria + precioPeso + precioSint;
 
             if (resolucion > 40)
             {
                 precioRes = precio_final * 0.3;
-                Math.Floor(precioRes);
             }
 
             precio_final = precio_final + precioRes;
@@ -252,8 +336,51 @@ namespace Ejercicio4
     {
         static void Main(string[] args)
         {
-            Electrodomestico electrodomestico = new Electrodomestico(250, "azul", 'B', 40);
-            Lavadora lavadora = new Lavadora(20, 250, "azul", 'B', 40);
+            Electrodomestico electrodomestico1 = new Electrodomestico(250, "Azul", 'B', 40);
+            Lavadora lavadora1 = new Lavadora(20, 350, "Negro", 'A', 20);
+            Television television1 = new Television(30, false , 100, "Negro", 'q', 5); 
+            Electrodomestico electrodomestico2 = new Electrodomestico(250, "Azul", 'B', 40);
+            Lavadora lavadora2 = new Lavadora(35, 475, "Blanco", 'A', 25);
+            Television television2 = new Television(60, true, 500, "Negro", 'A', 8); 
+            Electrodomestico electrodomestico3 = new Electrodomestico(300, "Blanco", 'C', 30);
+            Lavadora lavadora3 = new Lavadora(15, 350, "Verde", 'b', 17);
+            Television television3 = new Television(40, false, 150, "Azul", 'B', 7); 
+            Electrodomestico electrodomestico4 = new Electrodomestico(175, "rojo", 'C', 25);
+
+
+            Electrodomestico[] listaProductos = {electrodomestico1, lavadora1, television1, electrodomestico2, lavadora2, television2, electrodomestico3, lavadora3, television3, electrodomestico4};
+
+            
+
+            double sumaPrecioElect = 0;
+            double sumaPrecioTele = 0;
+            double sumaPrecioLava = 0;
+
+            
+            for (int i = 0; i < listaProductos.Length; i++)
+            {
+                 
+                if (listaProductos[i] is Electrodomestico)
+                {
+                    sumaPrecioElect += listaProductos[i].PrecioFinal();
+                }
+
+                if (listaProductos[i] is Lavadora)
+                {
+                    sumaPrecioLava += listaProductos[i].PrecioFinal();
+                }
+               
+                if (listaProductos[i] is Television)
+                {
+                    sumaPrecioTele += listaProductos[i].PrecioFinal();
+                }
+            }
+
+            Console.WriteLine("La suma del precio de los electrodomesticos es de " + sumaPrecioElect);
+            Console.WriteLine("La suma del precio de las lavadoras es de " + sumaPrecioLava);
+            Console.WriteLine("La suma del precio de las televisiones es de " + sumaPrecioTele);
+
+            Console.ReadKey();
         }
     }
 }
