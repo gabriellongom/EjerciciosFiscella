@@ -11,8 +11,8 @@ namespace Ejercicio7
         private double a;
         private double b;
         private double c;
-        public double raiz1 = 0;
-        public double raiz2 = 0;
+        public double raiz1;
+        public double raiz2;
 
         public Raices(double a, double b, double c)
         {
@@ -62,20 +62,21 @@ namespace Ejercicio7
             }
         }
 
-        public void Calcular()
+        public int Calcular()
         {
             if (tieneRaices())
             {
                 ObtenerRaices();
-                
+                return 2;
             }
             else if (tieneRaiz())
             {
                 ObtenerRaiz();
+                return 1;
             }
             else
             {
-                
+                return 0;
             }
         }
     }
