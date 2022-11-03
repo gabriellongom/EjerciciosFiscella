@@ -43,6 +43,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Aulas.cs" />
+    <Compile Include="Estudiantes.cs" />
+    <Compile Include="Personas.cs" />
+    <Compile Include="Profesores.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
