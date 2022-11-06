@@ -8,16 +8,37 @@ namespace Ejercicio8
 {
     internal abstract class Personas
     {
+
+        private static string[] nombres_chicos = { "Jose", "Pepe", "Pablo", "Hernan", "Juan", "Ignacio", "Ezequiel", "Martin", "Fernando", "Alberto", "Cesar", "Gabriel", "Maximo", "Agustin", "Roberto" };
+        private static string[] nombres_chicas = { "Josefina", "Penelope", "Maria", "Martina", "Aylen", "Paula", "Daniela", "Carla", "Sofia", "Lucia", "Abril", "Anais", "Camila", "Soledad", "Sheila" };
+
+
         private string nombre;
         private int edad;
         private char sexo;
         private bool asistio;
 
-        public Personas(string nombre, int edad, char sexo)
+
+
+        public Personas()
         {
-            this.nombre = nombre;
-            this.edad = edad;
-            this.sexo = sexo;
+            Random r = new Random();
+
+            int s = r.Next(0, 2);
+
+            if (s == 0)
+            {
+                nombre = nombres_chicos[r.Next(0, nombres_chicos.Length - 1)];
+                sexo = 'H';
+            }
+            else
+            {
+                nombre = nombres_chicas[r.Next(0, nombres_chicas.Length - 1)];
+                sexo = 'M';
+            }
+
+
+            asistencia();
         }
 
         public string Nombre
@@ -62,10 +83,13 @@ namespace Ejercicio8
             {
                 return asistio;
             }
+            set
+            {
+                asistio = value;
+            }
         }
 
-        public 
+        public abstract void asistencia();
+
     }
-
-
 }
