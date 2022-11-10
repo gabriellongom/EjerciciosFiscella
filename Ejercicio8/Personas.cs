@@ -11,7 +11,7 @@ namespace Ejercicio8
 
         private static string[] nombres_chicos = { "Jose", "Pepe", "Pablo", "Hernan", "Juan", "Ignacio", "Ezequiel", "Martin", "Fernando", "Alberto", "Cesar", "Gabriel", "Maximo", "Agustin", "Roberto" };
         private static string[] nombres_chicas = { "Josefina", "Penelope", "Maria", "Martina", "Aylen", "Paula", "Daniela", "Carla", "Sofia", "Lucia", "Abril", "Anais", "Camila", "Soledad", "Sheila" };
-
+        static Random r = new Random();
 
         private string nombre;
         private int edad;
@@ -20,13 +20,12 @@ namespace Ejercicio8
 
 
 
+
         public Personas()
         {
-            Random r = new Random();
+            int s = r.Next(0, 100);
 
-            int s = r.Next(0, 2);
-
-            if (s == 0)
+            if (s < 50)
             {
                 nombre = nombres_chicos[r.Next(0, nombres_chicos.Length - 1)];
                 sexo = 'H';
@@ -36,7 +35,6 @@ namespace Ejercicio8
                 nombre = nombres_chicas[r.Next(0, nombres_chicas.Length - 1)];
                 sexo = 'M';
             }
-
 
             asistencia();
         }
