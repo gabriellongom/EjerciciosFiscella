@@ -8,9 +8,11 @@ namespace Ejercicio9
 {
     class Program
     {
+        static Random r = new Random();
+
         static void Main(string[] args)
         {
-            Random r = new Random();
+            
             Pelicula peli = new Pelicula("Mi vida", 90, 16, "DDR");
 
             Console.WriteLine("Cuantas filas de butacas tiene la sala?");
