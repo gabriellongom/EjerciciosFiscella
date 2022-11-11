@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Asiento.cs" />
     <Compile Include="Cine.cs" />
     <Compile Include="Espectador.cs" />
     <Compile Include="Pelicula.cs" />
