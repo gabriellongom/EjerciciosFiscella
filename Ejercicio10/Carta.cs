@@ -8,12 +8,18 @@ namespace Ejercicio10
 {
     class Carta
     {
-        private static string[] palos = { "Oros", "Copas", "Bastos", "Espadas" };
-        private static int[] valores = { 1, 2, 3, 4, 5, 6, 7, 10, 11, 12 };
+        public static string[] palos = { "Oros", "Copas", "Bastos", "Espadas" };
+        public static int valor_max = 12;
 
         private string palo;
-        private int valor;
+        private int valor;  
         private bool enMazo;
+
+        public Carta(string palo, int valor)
+        {
+            this.palo = palo;
+            this.valor = valor;
+        }
 
     }
 }

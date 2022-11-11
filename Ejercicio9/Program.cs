@@ -34,7 +34,7 @@ namespace Ejercicio9
 
             Console.WriteLine("Espectadores: ");
 
-            for (int i = 0; i < CantEspectadores && sala.haySitio(); i++)
+            for (int i = 0; i < (sala.Columnas*sala.Filas); i++)
             {
                 e = new Espectador(Espectador.nombres[r.Next(0, Espectador.nombres.Length - 1)], r.Next(10, 30), r.Next(1, 15));
 
@@ -47,7 +47,7 @@ namespace Ejercicio9
                 {
                     fila = r.Next(0, sala.Filas - 1);
                     letra = (char)r.Next('A', 'A' + sala.Columnas - 1);
-                } while (sala.haySitioButaca(fila, letra));
+                } while (!sala.haySitioButaca(fila, letra));
 
                 if (sala.SePuedeSentar(e))
                 {

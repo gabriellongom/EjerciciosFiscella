@@ -78,7 +78,7 @@ namespace Ejercicio9
 
         public Asiento GetAsientoEspecifico(int fila, char letra)
         {
-            return asientos[asientos.Length - fila - 1][letra - 'A'];
+            return asientos[fila][letra - 'A'];
         }
 
         public void Butacas()
@@ -100,7 +100,6 @@ namespace Ejercicio9
             {
                 for (int j = 0; j < asientos[0].Length; j++)
                 {
-
                     if (!asientos[i][j].AsientoOcupado())
                     {
                         return true;
