@@ -10,27 +10,35 @@ namespace Ejercicio8
     {
         private static string[] materias_posibles = { "Matematicas", "Filosofia", "Fisica" };
         private static int espacio_aula = 30;
+        static Random r = new Random();
 
         private int id;
         private Profesores profesores;
-        private Estudiantes[] estudiantes;
+        List<Estudiantes> estudiantes;
         private string materia;
+
 
         public Aulas()
         {
-            Random r = new Random();
 
             id = r.Next(1, 999);
             materia = materias_posibles[r.Next(0, materias_posibles.Length - 1)];
             profesores = new Profesores();
-            estudiantes = new Estudiantes[espacio_aula];
-            for (int i = 0; i < estudiantes.Length; i++)
-            {
-                estudiantes[i] = new Estudiantes();
-            }
+            estudiantes = new List<Estudiantes>(espacio_aula);
         }
 
-        //este ejercicio tiene un error que lamentablemente no encontre manera de solucionar y es que cuando se crea un aula, todos los alumnos contienen los mismos datos como si fueran duplicados, sinceramente pase horas y no pude encontrar solucion
+        public List<Estudiantes> Estudiantes
+        {
+            get
+            {
+                return estudiantes;
+            }
+
+            set
+            {
+                estudiantes = value;
+            }
+        }
 
         private bool AsistenciasNecesarias()
         {
@@ -44,7 +52,7 @@ namespace Ejercicio8
                 }
             }
 
-            if (asistencias_totales > estudiantes.Length / 2)
+            if (asistencias_totales > estudiantes.Count / 2)
             {
                 return true;
             }
@@ -89,7 +97,7 @@ namespace Ejercicio8
 
         public void Show()
         {
-            for(int i = 0; i < estudiantes.Length; i++)
+            for(int i = 0; i < estudiantes.Count; i++)
             {
                 Console.WriteLine("Estudiante "+i+":");
                 Console.WriteLine(estudiantes[i].Nombre);

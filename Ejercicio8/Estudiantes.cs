@@ -8,12 +8,13 @@ namespace Ejercicio8
 {
     internal class Estudiantes : Personas
     {
+        static Random r = new Random();
         private int nota;
 
         public Estudiantes() : base()
         {
-            Random r = new Random();
-            nota = r.Next(1, 10);
+
+            nota = r.Next(0, 10);
             Edad = r.Next(13, 17);
         }
 
@@ -31,7 +32,6 @@ namespace Ejercicio8
 
         public override void asistencia()
         {
-            Random r = new Random();
             if (r.Next(0, 100) < 50)
             {
                 Asistio = false;
