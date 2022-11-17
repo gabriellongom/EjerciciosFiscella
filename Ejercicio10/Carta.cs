@@ -12,13 +12,27 @@ namespace Ejercicio10
         public static int valor_max = 12;
 
         private string palo;
-        private int valor;  
-        private bool enMazo;
+        private int valor;
 
         public Carta(string palo, int valor)
         {
             this.palo = palo;
             this.valor = valor;
+        }
+
+        public string Palo
+        {
+            get
+            {
+                return palo;
+            }
+        }
+        public int Valor
+        {
+            get
+            {
+                return valor;
+            }
         }
 
     }

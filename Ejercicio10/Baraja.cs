@@ -92,34 +92,37 @@ namespace Ejercicio10
             return cartas;
         }
 
-        public Carta CartasMonton()
+        public Carta[] CartasMonton()
         {
-            if (cartasDisponible() == NUM_CARTAS)
+            Carta[] cartasMonton = new Carta[posicionMazo];
+            if (CartasDisponibles() == max_baraja)
             {
-                System.out.println("No se ha sacado ninguna carta");
+                return cartasMonton;
             }
             else
             {
-                //Recorro desde 0 a la posSiguienteCarta
-                for (int i = 0; i < posSiguienteCarta; i++)
+                for (int i = 0; i < posicionMazo; i++)
                 {
-                    System.out.println(cartas[i]);
+                    cartasMonton[i] = mazo[i];
                 }
+                return cartasMonton;
             }
         }
 
-        public Carta MostrarBaraja()
+        public Carta[] MostrarBaraja()
         {
-            if (cartasDisponible() == 0)
+            Carta[] barajaRestante = new Carta[CartasDisponibles()];
+            if (CartasDisponibles() == 0)
             {
-                System.out.println("No hay cartas que mostrar");
+                return barajaRestante;
             }
             else
             {
-                for (int i = posSiguienteCarta; i < cartas.length; i++)
+                for (int i = posicionMazo; i < mazo.Length; i++)
                 {
-                    System.out.println(cartas[i]);
+                    barajaRestante[i-posicionMazo] = mazo[i];
                 }
+                return barajaRestante;
             }
         }
     }
