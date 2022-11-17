@@ -15,24 +15,35 @@ namespace Ejercicio12
 
         public Revolver()
         {
-
+            posicionActual = r.Next(1,6);
+            posicionBala = r.Next(1,6);
         }
 
         public bool Disparar()
         {
             if (posicionActual == posicionBala)
             {
+                SiguienteBala();
                 return true;
             }
             else
             {
+                SiguienteBala();
                 return false;
             }
+
         }
 
         public void SiguienteBala()
         {
-            posicionActual++;
+            if (posicionActual == 7)
+            {
+                posicionActual = 1;
+            }
+            else
+            {
+                posicionActual++;
+            }
         }
     }
 }

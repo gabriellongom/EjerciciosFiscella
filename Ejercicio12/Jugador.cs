@@ -13,17 +13,38 @@ namespace Ejercicio12
 
         int id;
         string nombre;
-        bool vivo = true;
+        bool vivo;
 
-        public Jugador()
+        public Jugador(int id)
         {
-
+            this.id = id;
+            nombre = nombres[id];
+            vivo = true;
         }
 
         public void Disparar(Revolver r)
         {
-            r.Disparar();
-            if()
+            
+            if(r.Disparar() == true)
+            {
+                vivo = false;
+            }
+        }
+
+        public int Id
+        {
+            get
+            {
+                return id;
+            }
+        }
+
+        public bool Vivo
+        {
+            get
+            {
+                return vivo;
+            }
         }
     }
 }

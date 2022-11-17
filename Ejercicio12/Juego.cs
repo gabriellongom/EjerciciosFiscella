@@ -11,24 +11,53 @@ namespace Ejercicio12
         static Random r = new Random();
 
         Jugador[] jugadores;
-        Revolver revolver;
+        Revolver revolver = new Revolver();
 
         public Juego(int cantJugadores)
         {
-            for(int i = 0; i < cantJugadores;)
+            if (cantJugadores < 7 && cantJugadores > 0)
             {
-                jugadores[i] = new Jugador();
+                jugadores = new Jugador[cantJugadores];
+            }
+            else
+            {
+                jugadores = new Jugador[6];
+            }
+            for (int i = 0; i < jugadores.Length; i++)
+            {
+                jugadores[i] = new Jugador(i);
             }
         }
 
         public bool FinJuego()
         {
-
+            for (int i = 0; i < jugadores.Length; i++)
+            {
+                if (!jugadores[i].Vivo)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         public void ronda()
         {
 
+            for (int i = 0; i < jugadores.Length; i++)
+            {
+
+                jugadores[i].Disparar(revolver);
+            }
+
+        }
+
+        public Jugador[] Jugadores
+        {
+            get
+            {
+                return jugadores;
+            }
         }
     }
 }
