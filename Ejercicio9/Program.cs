@@ -24,8 +24,6 @@ namespace Ejercicio9
 
             Cine sala = new Cine(filas, columnas, precio, peli);
 
-            Console.WriteLine("Cuanta gente vino a ver la pelicula");
-            int CantEspectadores = int.Parse(Console.ReadLine());
             Espectador e;
             int fila;
             char letra;
@@ -38,11 +36,6 @@ namespace Ejercicio9
             {
                 e = new Espectador(Espectador.nombres[r.Next(0, Espectador.nombres.Length - 1)], r.Next(10, 30), r.Next(1, 15));
 
-                cont++;
-                Console.WriteLine("\n"+e.Nombre);
-                Console.WriteLine(e.Edad);
-                Console.WriteLine(e.Dinero);
-
                 do
                 {
                     fila = r.Next(0, sala.Filas - 1);
@@ -53,6 +46,11 @@ namespace Ejercicio9
                 {
                     e.PagarEntrada(precio);
                     sala.Sentar(fila, letra, e);
+
+                    cont++;
+                    Console.WriteLine("\n" + e.Nombre);
+                    Console.WriteLine(e.Edad);
+                    Console.WriteLine(e.Dinero+sala.Precio);
                 }
             }
 
@@ -68,8 +66,6 @@ namespace Ejercicio9
                 }
                 Console.WriteLine("");
             }
-
-            Console.WriteLine("\n" + cont);
 
             Console.ReadKey();
         }
